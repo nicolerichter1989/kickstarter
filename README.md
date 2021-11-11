@@ -54,7 +54,27 @@ Here is and overview of the columns used for EDA and model:
 | description_len | timestamp of when the project was launched |
 | description_kw | e |
 
-### Workflow
+### Notes from Tableau EDA
+
+- project duration ranges from x to y
+- project duration is shorter for successful projects (among all categories, countries)
+- the average goal is lower for more successful projects
+- no country except japan has a successful project over 5M
+- generally most successful project reached a goal up to 1M
+- almost all project over 1M fail
+- the failed% increases as the goal increases
+
+### What makes a project successful?
+
+- goal under 5k 67% success - between 5k and 100k still 51%
+- successful project averagely last 32 days
+- categories technology, photography, food, crafts and journalism succeed less often (-50%)
+- a project described in english is more succeeds more often then e.g. es,fe,de,it,nl
+- the most successful projects are launched and finished on a tuesday (73,48%)
+- generally most successful projects are launched on tuesdays
+- 
+
+
 
 
 ## Python Libraries

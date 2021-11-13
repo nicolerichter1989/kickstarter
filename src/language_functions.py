@@ -2,10 +2,13 @@
 
 from textblob import TextBlob
 import langid
+import ast
 import yake
 from rake_nltk import Rake
 import nltk
 from deep_translator import GoogleTranslator
+from nltk.tokenize import sent_tokenize, word_tokenize
+from nltk.sentiment import SentimentIntensityAnalyzer
 
 ## functions
 
@@ -144,4 +147,59 @@ def translation(column, df):
     return df
 #
 #
+#
+def nltk_features(column, df):
 
+    '''this function returns the length of text for the input column'''
+
+    word = []
+    sent = []
+
+    for i in df[f'{column}']:
+        word.append(len(word_tokenize(str(i))))
+        sent.append(len(sent_tokenize(str(i))))       
+
+    df[f'{column}' + '_word'] = word
+    df[f'{column}' + '_sent'] = sent
+
+    return df
+#
+#
+#
+def nltk_sentiment(column, df):
+
+    '''this function returns the length of text for the input column'''
+    
+    sia = SentimentIntensityAnalyzer()
+
+    neg = []
+    neu = []
+    pos = []
+    compound = []
+
+    for i in df[f'{column}']:
+
+        if isinstance(i, float):
+            neg.append('')
+            neu.append('')
+            pos.append('')
+            compound.append('')  
+       
+        else:
+            dictionary = sia.polarity_scores(i)
+    
+            neg.append(dictionary.get('neg'))
+            neu.append(dictionary.get('neu'))
+            pos.append(dictionary.get('pos'))
+            compound.append(dictionary.get('compound'))
+
+
+    df[f'{column}' + '_neg'] = neg
+    df[f'{column}' + '_neu'] = neu
+    df[f'{column}' + '_pos'] = pos
+    df[f'{column}' + '_compound'] = compound
+
+    return df
+#
+#
+#

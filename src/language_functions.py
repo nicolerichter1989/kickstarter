@@ -5,9 +5,6 @@ import langid
 import yake
 from rake_nltk import Rake
 import nltk
-nltk.download('stopwords')
-import nltk
-nltk.download('punkt')
 from deep_translator import GoogleTranslator
 
 ## functions
@@ -121,6 +118,28 @@ def language_keywords(column, df):
             kw.append(r.get_ranked_phrases_with_scores())
     
     df[f'{column}' + '_kw'] = kw
+
+    return df
+#
+#
+#
+def translation(column, df):
+
+    '''this function returns the length of text for the input column'''
+
+    trans = []
+
+    for i in df[f'{column}']:
+        if isinstance(i, float):
+            trans.append('')
+        else:
+            if len(i) >= 5000:
+                trans.append('')
+            else:
+                a = GoogleTranslator(source='auto', target='en').translate(i)
+                trans.append(a)
+    
+    df[f'{column}' + '_trans'] = trans
 
     return df
 #

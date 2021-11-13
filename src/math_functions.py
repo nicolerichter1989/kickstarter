@@ -85,8 +85,6 @@ def get_category_data(column, df):
 
     '''this function takes a timestamp and creates 3 new columns for date,time,weekday out of it'''  
 
-    name = []
-    analytics_name = []
     slug = []
     parent_name = []
 
@@ -94,15 +92,32 @@ def get_category_data(column, df):
 
         dictionary = ast.literal_eval(i)
         
-        name.append(dictionary.get('name'))
-        analytics_name.append(dictionary.get('analytics_name'))
         slug.append(dictionary.get('slug'))
         parent_name.append(dictionary.get('parent_name'))
 
-    df[f'{column}' + '_name'] = name
-    df[f'{column}' + '_analytics_name'] = analytics_name
     df[f'{column}' + '_slug'] = slug
     df[f'{column}' + '_parent_name'] = parent_name
+
+    return df
+#
+#
+#
+def get_creator_data(column, df):
+
+    '''this function takes a timestamp and creates 3 new columns for date,time,weekday out of it'''  
+
+    is_registered = []
+    is_email_verified = []
+
+    for i in df[f'{column}']:
+
+        dictionary = ast.literal_eval(i)
+        
+        is_registered.append(dictionary.get('is_registered'))
+        is_email_verified.append(dictionary.get('is_email_verified'))
+
+    df[f'{column}' + '_registered'] = is_registered
+    df[f'{column}' + '_email'] = is_email_verified
 
     return df
 #

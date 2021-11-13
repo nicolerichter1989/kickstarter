@@ -102,24 +102,3 @@ def get_category_data(column, df):
 #
 #
 #
-def get_creator_data(column, df):
-
-    '''this function takes a timestamp and creates 3 new columns for date,time,weekday out of it'''  
-
-    is_registered = []
-    is_email_verified = []
-
-    for i in df[f'{column}']:
-
-        dictionary = ast.literal_eval(i)
-        
-        is_registered.append(dictionary.get('is_registered'))
-        is_email_verified.append(dictionary.get('is_email_verified'))
-
-    df[f'{column}' + '_registered'] = is_registered
-    df[f'{column}' + '_email'] = is_email_verified
-
-    return df
-#
-#
-#

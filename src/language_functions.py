@@ -9,6 +9,7 @@ import nltk
 from deep_translator import GoogleTranslator
 from nltk.tokenize import sent_tokenize, word_tokenize
 from nltk.sentiment import SentimentIntensityAnalyzer
+from collections import OrderedDict, defaultdict
 
 ## functions
 
@@ -198,6 +199,29 @@ def nltk_sentiment(column, df):
     df[f'{column}' + '_neu'] = neu
     df[f'{column}' + '_pos'] = pos
     df[f'{column}' + '_compound'] = compound
+
+    return df
+#
+#
+#
+def group_columns(column, df, threshold):
+
+    '''this function returns the length of text for the input column'''
+    
+    a = df[f'{column}'].value_counts()
+    dd = defaultdict(list)
+    languages = a.to_dict(dd)
+
+    new = []
+
+    for i in df[f'{column}']:
+
+        if languages.get(i) <= threshold:
+            new.append('other')
+        else:
+            new.append(i)
+
+    df[f'{column}' + '_new'] = new
 
     return df
 #

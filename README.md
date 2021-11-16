@@ -21,7 +21,7 @@ The data has been extracted via apify downloads from kickstarter.
 ### Shape of the Data
 
 Before cleaning the dataframe consisted of 543.589 rows and 39 columns. 
-After cleaning the dataframe used for EDA and model consisted of 184.554 rows and 26 columns.
+After cleaning the dataframe used for EDA and model consisted of 176.721 rows and 22 columns.
 
 Here is and overview of the columns used for EDA and model:
 

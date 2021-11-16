@@ -49,10 +49,7 @@ Here is and overview of the columns used for EDA and model:
 | funded_rate | e |
 | blurb_language | e |
 | description | goal amount |
-| description_pol | project id |
-| description_sub | e |
-| description_len | timestamp of when the project was launched |
-| description_kw | e |
+
 
 ### Notes from Tableau EDA
 

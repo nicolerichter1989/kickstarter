@@ -14,6 +14,7 @@ from sklearn.metrics import mean_absolute_error
 from sklearn.metrics import mean_squared_error
 import math
 from sklearn.metrics import mean_squared_error
+import seaborn as sns
 
 ## functions
 
@@ -106,12 +107,25 @@ def confusion_matrix(y_test, predictions):
     labels = np.asarray(labels).reshape(2,2)
     sns.heatmap(cf_matrix, annot=labels, fmt='', cmap='Blues')
 
-    return
+    return cf_matrix
 #
 #
 #
+def encode_categoricals(X):
 
+    '''write description'''
 
+    # split into numerical and categorical variables
+    X_num = X.select_dtypes(include = np.number)
+    X_cat = X.select_dtypes(include = object)
 
+    # encode categorical variables 
+    X_cat = pd.get_dummies(X_cat) 
+ 
+    # create new df from encoded cat_df and num_df (define X again)
+    X = pd.concat([X_cat, X_num], axis = 1)
 
-
+    return X
+#
+#
+#

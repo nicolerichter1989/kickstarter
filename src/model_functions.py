@@ -31,7 +31,18 @@ def classification_tree(X, y):
     score = "{:.2%}".format(round(model.score(X_test, y_test),4))
     predictions = predictions = model.predict(X_test)
 
-    return print('model_score: ', score), print(metrics.classification_report(y_test, predictions))
+    # create confusion_matrix
+    confusion = metrics.confusion_matrix(y_test, predictions)
+    true_positives = confusion[1,1]
+    true_negatives = confusion[0,0]
+    false_positives = confusion[0,1]
+    false_negatives = confusion[1,0]
+
+    accuracy = "{:.2%}".format(round(((true_positives+true_negatives)/(true_positives+true_negatives+false_positives+false_negatives)),4))
+    sensitivity = "{:.2%}".format(round((true_positives/(true_positives+false_negatives)),4))
+    sepcificity = "{:.2%}".format(round(((+true_negatives)/(true_negatives+false_positives)),4))
+
+    return print('model_score: ', score, ' - ', 'model_accuracy: ', accuracy, ' - ', 'model_sensitivity: ', sensitivity, ' - ', 'model_specificity: ', sepcificity)
 #
 #
 #
@@ -50,7 +61,18 @@ def classification_KNN(X, y):
     score = "{:.2%}".format(round(model.score(X_test, y_test),4))
     predictions = predictions = model.predict(X_test)
 
-    return print('model_score: ', score), print(metrics.classification_report(y_test, predictions))
+    # create confusion_matrix
+    confusion = metrics.confusion_matrix(y_test, predictions)
+    true_positives = confusion[1,1]
+    true_negatives = confusion[0,0]
+    false_positives = confusion[0,1]
+    false_negatives = confusion[1,0]
+
+    accuracy = "{:.2%}".format(round(((true_positives+true_negatives)/(true_positives+true_negatives+false_positives+false_negatives)),4))
+    sensitivity = "{:.2%}".format(round((true_positives/(true_positives+false_negatives)),4))
+    sepcificity = "{:.2%}".format(round(((+true_negatives)/(true_negatives+false_positives)),4))
+
+    return print('model_score: ', score, ' - ', 'model_accuracy: ', accuracy, ' - ', 'model_sensitivity: ', sensitivity, ' - ', 'model_specificity: ', sepcificity)
 #
 #
 #
@@ -69,7 +91,18 @@ def classification_LogisticRegression(X, y):
     score = "{:.2%}".format(round(model.score(X_test, y_test),4))
     predictions = predictions = model.predict(X_test)
 
-    return print('model_score: ', score), print(metrics.classification_report(y_test, predictions))
+    # create confusion_matrix
+    confusion = metrics.confusion_matrix(y_test, predictions)
+    true_positives = confusion[1,1]
+    true_negatives = confusion[0,0]
+    false_positives = confusion[0,1]
+    false_negatives = confusion[1,0]
+
+    accuracy = "{:.2%}".format(round(((true_positives+true_negatives)/(true_positives+true_negatives+false_positives+false_negatives)),4))
+    sensitivity = "{:.2%}".format(round((true_positives/(true_positives+false_negatives)),4))
+    sepcificity = "{:.2%}".format(round(((+true_negatives)/(true_negatives+false_positives)),4))
+
+    return print('model_score: ', score, ' - ', 'model_accuracy: ', accuracy, ' - ', 'model_sensitivity: ', sensitivity, ' - ', 'model_specificity: ', sepcificity)
 #
 #
 #
@@ -107,9 +140,9 @@ def standardizer(X):
     x_array = pd.DataFrame(x_standardized, columns = X_num.columns)
 
     # create new df from encoded cat_df and num_df (define X again)
-    Xs = pd.concat([X_cat, x_array], axis = 1)
+    Xresult = pd.concat([X_cat, x_array], axis = 1)
 
-    return Xs
+    return Xresult
 #
 #
 #
@@ -129,9 +162,9 @@ def min_max_imizer(X):
     x_array = pd.DataFrame(x_min_max, columns = X_num.columns)
 
     # create new df from encoded cat_df and num_df (define X again)
-    Xm = pd.concat([X_cat, x_array], axis = 1)
+    Xresult = pd.concat([X_cat, x_array], axis = 1)
 
-    return Xm
+    return Xresult
 #
 #
 #
@@ -151,9 +184,9 @@ def normalizer(X):
     x_array = pd.DataFrame(x_normalized, columns = X_num.columns)
 
     # create new df from encoded cat_df and num_df (define X again)
-    Xn = pd.concat([X_cat, x_array], axis = 1)
+    Xresult = pd.concat([X_cat, x_array], axis = 1)
 
-    return Xn
+    return Xresult
 #
 #
 #

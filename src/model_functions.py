@@ -42,7 +42,7 @@ def classification_tree(X, y):
     sensitivity = "{:.2%}".format(round((true_positives/(true_positives+false_negatives)),4))
     sepcificity = "{:.2%}".format(round(((+true_negatives)/(true_negatives+false_positives)),4))
 
-    return print('model_input: ', classification_tree.__code__.co_varnames, ' - ', 'accuracy: ', accuracy, ' - ', 'sensitivity: ', sensitivity, ' - ', 'specificity: ', sepcificity)
+    return print('accuracy: ', accuracy, ' - ', 'sensitivity: ', sensitivity, ' - ', 'specificity: ', sepcificity)
 #
 #
 #
@@ -72,7 +72,7 @@ def classification_KNN(X, y):
     sensitivity = "{:.2%}".format(round((true_positives/(true_positives+false_negatives)),4))
     sepcificity = "{:.2%}".format(round(((+true_negatives)/(true_negatives+false_positives)),4))
 
-    return print('model_input: ', classification_KNN.__code__.co_varnames, ' - ', 'accuracy: ', accuracy, ' - ', 'sensitivity: ', sensitivity, ' - ', 'specificity: ', sepcificity)
+    return print('accuracy: ', accuracy, ' - ', 'sensitivity: ', sensitivity, ' - ', 'specificity: ', sepcificity)
 #
 #
 #
@@ -102,7 +102,7 @@ def classification_LogisticRegression(X, y):
     sensitivity = "{:.2%}".format(round((true_positives/(true_positives+false_negatives)),4))
     sepcificity = "{:.2%}".format(round(((+true_negatives)/(true_negatives+false_positives)),4))
 
-    return print('model_input: ', classification_LogisticRegression.__code__.co_varnames, ' - ', 'accuracy: ', accuracy, ' - ', 'sensitivity: ', sensitivity, ' - ', 'specificity: ', sepcificity)
+    return print('accuracy: ', accuracy, ' - ', 'sensitivity: ', sensitivity, ' - ', 'specificity: ', sepcificity)
 #
 #
 #

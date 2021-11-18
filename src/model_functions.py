@@ -10,7 +10,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.neighbors import KNeighborsRegressor
-from sklearn.metrics import confusion_matrix, mean_absolute_error, mean_squared_error, r2_score
+from sklearn import metrics
+from sklearn.metrics import confusion_matrix, mean_absolute_error, mean_squared_error, r2_score, accuracy_score
 from sklearn.preprocessing import StandardScaler, MinMaxScaler, Normalizer
 
 ## functions
@@ -19,29 +20,24 @@ def classification_tree(X, y):
 
     '''write description'''
 
-    #what needs to be the input?
-    #what needs to be the return?
-
     # split in train and test data
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25)
 
     # pick and fit model
     model = DecisionTreeClassifier()
     model.fit(X_train, y_train)
-    
-    # calculate score
-    score = model.score(X_test, y_test)
 
-    return score
+    # calculate score and predictions
+    score = "{:.2%}".format(round(model.score(X_test, y_test),4))
+    predictions = predictions = model.predict(X_test)
+
+    return print('model_score: ', score), print(metrics.classification_report(y_test, predictions))
 #
 #
 #
 def classification_KNN(X, y):
 
     '''write description'''
-
-    #what needs to be the input?
-    #what needs to be the return?
 
     # split in train and test data
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25)
@@ -50,19 +46,17 @@ def classification_KNN(X, y):
     model = KNeighborsRegressor(n_neighbors=4)
     model.fit(X_train, y_train)
 
-    # calculate score
-    score = model.score(X_test, y_test)
+    # calculate score and predictions
+    score = "{:.2%}".format(round(model.score(X_test, y_test),4))
+    predictions = predictions = model.predict(X_test)
 
-    return score
-#
+    return print('model_score: ', score), print(metrics.classification_report(y_test, predictions))
 #
 #
 #
 def classification_LogisticRegression(X, y):
 
     '''write description'''
-
-    #what needs to be the return?
 
     # split in train and test data
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25)
@@ -71,30 +65,11 @@ def classification_LogisticRegression(X, y):
     model = LogisticRegression(max_iter=1000)
     model.fit(X_train, y_train)
 
-    # calculate score
-    score = model.score(X_test, y_test)
+    # calculate score and predictions
+    score = "{:.2%}".format(round(model.score(X_test, y_test),4))
+    predictions = predictions = model.predict(X_test)
 
-    return score
-#
-#
-#
-def confusion_matrix(y_test, predictions):
-
-    '''write description'''
-
-    #what needs to be the input?
-    #what needs to be the return?
-
-    cf_matrix = confusion_matrix(y_test, predictions)
-    group_names = ['True A', 'False A','False B', 'True B']
-
-    group_counts = ["{0:0.0f}".format(value) for value in cf_matrix.flatten()]
-    group_percentages = ["{0:.2%}".format(value) for value in cf_matrix.flatten()/np.sum(cf_matrix)]
-    labels = [f"{v1}\n{v2}\n{v3}" for v1, v2, v3 in zip(group_names,group_counts,group_percentages)]
-    labels = np.asarray(labels).reshape(2,2)
-    sns.heatmap(cf_matrix, annot=labels, fmt='', cmap='Blues')
-
-    return cf_matrix
+    return print('model_score: ', score), print(metrics.classification_report(y_test, predictions))
 #
 #
 #

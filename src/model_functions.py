@@ -2,19 +2,16 @@
 
 import pandas as pd
 import numpy as np
+import math
+import seaborn as sns
 from imblearn.over_sampling import SMOTE
 from imblearn.under_sampling import TomekLinks
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import mean_squared_error, r2_score, confusion_matrix
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.neighbors import KNeighborsRegressor
-from sklearn.metrics import confusion_matrix
-from sklearn.metrics import mean_absolute_error
-from sklearn.metrics import mean_squared_error
-import math
-from sklearn.metrics import mean_squared_error
-import seaborn as sns
+from sklearn.metrics import confusion_matrix, mean_absolute_error, mean_squared_error, r2_score
+from sklearn.preprocessing import StandardScaler, MinMaxScaler, Normalizer
 
 ## functions
 
@@ -124,6 +121,63 @@ def encode_categoricals(X):
  
     # create new df from encoded cat_df and num_df (define X again)
     X = pd.concat([X_cat, X_num], axis = 1)
+
+    return X
+#
+#
+#
+def standardizer(X):
+
+    '''write description'''
+
+    # split into numerical and categorical variables
+    X_num = X.select_dtypes(include = np.number)
+    X_cat = X.select_dtypes(include = object)
+
+    # standardize
+    transformer = StandardScaler().fit(X_num)
+    x_standardized = transformer.transform(X_num)
+ 
+    # create new df from encoded cat_df and num_df (define X again)
+    X = pd.concat([X_cat, x_standardized], axis = 1)
+
+    return X
+#
+#
+#
+def min_max_imizer(X):
+
+    '''write description'''
+
+    # split into numerical and categorical variables
+    X_num = X.select_dtypes(include = np.number)
+    X_cat = X.select_dtypes(include = object)
+
+    # standardize
+    transformer = MinMaxScaler().fit(X_num)
+    x_min_max = transformer.transform(X_num)
+ 
+    # create new df from encoded cat_df and num_df (define X again)
+    X = pd.concat([X_cat, x_min_max], axis = 1)
+
+    return X
+#
+#
+#
+def normalizer(X):
+
+    '''write description'''
+
+    # split into numerical and categorical variables
+    X_num = X.select_dtypes(include = np.number)
+    X_cat = X.select_dtypes(include = object)
+
+    # standardize
+    transformer = Normalizer().fit(X_num)
+    x_normalized = transformer.transform(X_num)
+ 
+    # create new df from encoded cat_df and num_df (define X again)
+    X = pd.concat([X_cat, x_normalized], axis = 1)
 
     return X
 #

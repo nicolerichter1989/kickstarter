@@ -16,7 +16,7 @@ from sklearn.preprocessing import StandardScaler, MinMaxScaler, Normalizer
 
 ## functions
 
-def classification_tree(X, y):
+def classification_tree(model_name, X, y):
 
     '''write description'''
 
@@ -42,11 +42,11 @@ def classification_tree(X, y):
     sensitivity = "{:.2%}".format(round((true_positives/(true_positives+false_negatives)),4))
     sepcificity = "{:.2%}".format(round(((+true_negatives)/(true_negatives+false_positives)),4))
 
-    return print('accuracy: ', accuracy, ' - ', 'sensitivity: ', sensitivity, ' - ', 'specificity: ', sepcificity)
+    return print('model: ', f'{model_name}', 'accuracy: ', accuracy, ' - ', 'sensitivity: ', sensitivity, ' - ', 'specificity: ', sepcificity)
 #
 #
 #
-def classification_KNN(X, y):
+def classification_KNN(model_name, X, y):
 
     '''write description'''
 
@@ -72,11 +72,11 @@ def classification_KNN(X, y):
     sensitivity = "{:.2%}".format(round((true_positives/(true_positives+false_negatives)),4))
     sepcificity = "{:.2%}".format(round(((+true_negatives)/(true_negatives+false_positives)),4))
 
-    return print('accuracy: ', accuracy, ' - ', 'sensitivity: ', sensitivity, ' - ', 'specificity: ', sepcificity)
+    return print('model: ', f'{model_name}', 'accuracy: ', accuracy, ' - ', 'sensitivity: ', sensitivity, ' - ', 'specificity: ', sepcificity)
 #
 #
 #
-def classification_LogisticRegression(X, y):
+def classification_LogisticRegression(model_name, X, y):
 
     '''write description'''
 
@@ -102,7 +102,7 @@ def classification_LogisticRegression(X, y):
     sensitivity = "{:.2%}".format(round((true_positives/(true_positives+false_negatives)),4))
     sepcificity = "{:.2%}".format(round(((+true_negatives)/(true_negatives+false_positives)),4))
 
-    return print('accuracy: ', accuracy, ' - ', 'sensitivity: ', sensitivity, ' - ', 'specificity: ', sepcificity)
+    return print('model: ', f'{model_name}', 'accuracy: ', accuracy, ' - ', 'sensitivity: ', sensitivity, ' - ', 'specificity: ', sepcificity)
 #
 #
 #

@@ -28,14 +28,11 @@ def classification_tree(X, y):
     # pick and fit model
     model = DecisionTreeClassifier()
     model.fit(X_train, y_train)
+    
+    # calculate score
+    score = model.score(X_test, y_test)
 
-    # make predictions
-    predictions = model.predict(X_test)
-    MAE = mean_absolute_error(y_test, predictions)
-    MSE = mean_squared_error(y_test, predictions)   
-    RSME = math.sqrt(MSE)
-
-    return print('MAE' + MAE, 'MSE' +  MSE, 'RSME' +  RSME)
+    return score
 #
 #
 #
@@ -53,13 +50,10 @@ def classification_KNN(X, y):
     model = KNeighborsRegressor(n_neighbors=4)
     model.fit(X_train, y_train)
 
-    # make predictions
-    predictions = model.predict(X_test)
-    MAE = mean_absolute_error(y_test, predictions)
-    MSE = mean_squared_error(y_test, predictions)   
-    RSME = math.sqrt(MSE)
+    # calculate score
+    score = model.score(X_test, y_test)
 
-    return print('MAE' + MAE, 'MSE' +  MSE, 'RSME' +  RSME)
+    return score
 #
 #
 #
@@ -68,7 +62,6 @@ def classification_LogisticRegression(X, y):
 
     '''write description'''
 
-    #what needs to be the input?
     #what needs to be the return?
 
     # split in train and test data
@@ -77,14 +70,11 @@ def classification_LogisticRegression(X, y):
     # pick and fit model  
     model = LogisticRegression(max_iter=1000)
     model.fit(X_train, y_train)
- 
-    # make predictions
-    predictions = model.predict(X_test)
-    MAE = mean_absolute_error(y_test, predictions)
-    MSE = mean_squared_error(y_test, predictions)   
-    RSME = math.sqrt(MSE)
 
-    return print('MAE' + MAE, 'MSE' +  MSE, 'RSME' +  RSME)
+    # calculate score
+    score = model.score(X_test, y_test)
+
+    return score
 #
 #
 #
@@ -137,11 +127,14 @@ def standardizer(X):
     # standardize
     transformer = StandardScaler().fit(X_num)
     x_standardized = transformer.transform(X_num)
- 
-    # create new df from encoded cat_df and num_df (define X again)
-    X = pd.concat([X_cat, x_standardized], axis = 1)
 
-    return X
+    # change np.array into df
+    x_array = pd.DataFrame(x_standardized, columns = X_num.columns)
+
+    # create new df from encoded cat_df and num_df (define X again)
+    Xs = pd.concat([X_cat, x_array], axis = 1)
+
+    return Xs
 #
 #
 #
@@ -157,10 +150,13 @@ def min_max_imizer(X):
     transformer = MinMaxScaler().fit(X_num)
     x_min_max = transformer.transform(X_num)
  
-    # create new df from encoded cat_df and num_df (define X again)
-    X = pd.concat([X_cat, x_min_max], axis = 1)
+    # change np.array into df
+    x_array = pd.DataFrame(x_min_max, columns = X_num.columns)
 
-    return X
+    # create new df from encoded cat_df and num_df (define X again)
+    Xm = pd.concat([X_cat, x_array], axis = 1)
+
+    return Xm
 #
 #
 #
@@ -176,10 +172,13 @@ def normalizer(X):
     transformer = Normalizer().fit(X_num)
     x_normalized = transformer.transform(X_num)
  
-    # create new df from encoded cat_df and num_df (define X again)
-    X = pd.concat([X_cat, x_normalized], axis = 1)
+    # change np.array into df
+    x_array = pd.DataFrame(x_normalized, columns = X_num.columns)
 
-    return X
+    # create new df from encoded cat_df and num_df (define X again)
+    Xn = pd.concat([X_cat, x_array], axis = 1)
+
+    return Xn
 #
 #
 #

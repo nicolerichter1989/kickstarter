@@ -4,12 +4,14 @@ from textblob import TextBlob
 import langid
 import ast
 import yake
-from rake_nltk import Rake
-import nltk
 from deep_translator import GoogleTranslator
-from nltk.tokenize import sent_tokenize, word_tokenize
-from nltk.sentiment import SentimentIntensityAnalyzer
 from collections import OrderedDict, defaultdict
+import nltk
+from nltk.tokenize import sent_tokenize, word_tokenize
+from nltk.corpus import stopwords
+from rake_nltk import Rake
+from nltk.sentiment import SentimentIntensityAnalyzer
+
 
 ## functions
 
@@ -149,24 +151,6 @@ def translation(column, df):
 #
 #
 #
-def nltk_features(column, df):
-
-    '''this function returns the length of text for the input column'''
-
-    word = []
-    sent = []
-
-    for i in df[f'{column}']:
-        word.append(len(word_tokenize(str(i))))
-        sent.append(len(sent_tokenize(str(i))))       
-
-    df[f'{column}' + '_word'] = word
-    df[f'{column}' + '_sent'] = sent
-
-    return df
-#
-#
-#
 def nltk_sentiment(column, df):
 
     '''this function returns the length of text for the input column'''
@@ -222,6 +206,53 @@ def group_columns(column, df, threshold):
             new.append(i)
 
     df[f'{column}' + '_new'] = new
+
+    return df
+#
+#
+#
+def more_nltk(column, df):
+
+    '''this function returns the length of text for the input column'''
+
+    stop_words = set(stopwords.words('english'))
+
+    words = []
+    filtered_words = []
+    sent = []
+    stopw = []
+
+    for i in df[f'{column}']:
+        words.append(len(word_tokenize(str(i))))
+        filtered_words.append(len([w for w in i if not w.lower() in stop_words]))
+        sent.append(len(sent_tokenize(str(i))))
+
+    stopw = (len(word_tokenize(str(i)))) - (len([w for w in i if not w.lower() in stop_words]))
+
+    df[f'{column}' + '_words'] = words
+    df[f'{column}' + '_filtered_words'] = filtered_words
+    df[f'{column}' + '_sent'] = sent
+    df[f'{column}' + '_stopw'] = stopw
+
+    return df
+#
+#
+#
+def get_keywords(column, df):
+
+    '''this function returns the length of text for the input column'''
+
+    # uses english stopwords and all puctuation characters
+    r = Rake()
+
+    keywords = []
+
+    for i in df[f'{column}']:
+        r.extract_keywords_from_text(i)
+        scores = r.get_word_degrees()
+        keywords.append(scores.keys())
+
+    df[f'{column}' + '_kw'] = keywords
 
     return df
 #

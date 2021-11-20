@@ -9,7 +9,7 @@ from imblearn.under_sampling import TomekLinks
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.linear_model import LogisticRegression
-from sklearn.neighbors import KNeighborsRegressor
+from sklearn.neighbors import KNeighborsClassifier
 from sklearn import metrics
 from sklearn.metrics import confusion_matrix, mean_absolute_error, mean_squared_error, r2_score, accuracy_score
 from sklearn.preprocessing import StandardScaler, MinMaxScaler, Normalizer
@@ -52,7 +52,7 @@ def classification_KNN(model_name, X, y):
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25)
 
     # pick and fit model  
-    model = KNeighborsRegressor(n_neighbors=75)
+    model = KNeighborsClassifier(n_neighbors=75)
     model.fit(X_train, y_train)
 
     predictions = model.predict(X_test)
@@ -94,7 +94,7 @@ def classification_LogisticRegression(model_name, X, y):
 
     accuracy = "{:.2%}".format(round(((true_positives+true_negatives)/(true_positives+true_negatives+false_positives+false_negatives)),4))
     sensitivity = "{:.2%}".format(round((true_positives/(true_positives+false_negatives)),4))
-    sepcificity = "{:.2%}".format(round(((+true_negatives)/(true_negatives+false_positives)),4))
+    sepcificity = "{:.2%}".format(round(((true_negatives)/(true_negatives+false_positives)),4))
 
     return print('model: ', f'{model_name}', 'accuracy: ', accuracy, ' - ', 'sensitivity: ', sensitivity, ' - ', 'specificity: ', sepcificity)
 #
@@ -134,9 +134,14 @@ def standardizer(X):
     x_array = pd.DataFrame(x_standardized, columns = X_num.columns)
 
     # create new df from encoded cat_df and num_df (define X again)
-    # Xresult = pd.concat([X_cat, x_array], axis = 1)
+    Xresult = pd.concat([X_cat, x_array], axis = 1)
 
-    return x_array
+    if len(X_cat.columns) == 0:
+        X_out = x_array
+    else:
+        X_out = Xresult
+
+    return X_out
 #
 #
 #
@@ -156,9 +161,14 @@ def min_max_imizer(X):
     x_array = pd.DataFrame(x_min_max, columns = X_num.columns)
 
     # create new df from encoded cat_df and num_df (define X again)
-    # Xresult = pd.concat([X_cat, x_array], axis = 1)
+    Xresult = pd.concat([X_cat, x_array], axis = 1)
 
-    return x_array
+    if len(X_cat.columns) == 0:
+        X_out = x_array
+    else:
+        X_out = Xresult
+
+    return X_out
 #
 #
 #
@@ -178,9 +188,14 @@ def normalizer(X):
     x_array = pd.DataFrame(x_normalized, columns = X_num.columns)
 
     # create new df from encoded cat_df and num_df (define X again)
-    # Xresult = pd.concat([X_cat, x_array], axis = 1)
+    Xresult = pd.concat([X_cat, x_array], axis = 1)
 
-    return x_array
+    if len(X_cat.columns) == 0:
+        X_out = x_array
+    else:
+        X_out = Xresult
+
+    return X_out
 #
 #
 #

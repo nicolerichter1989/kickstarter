@@ -18,7 +18,7 @@ from sklearn.preprocessing import StandardScaler, MinMaxScaler, Normalizer
 
 def classification_tree(model_name, X, y):
 
-    '''write description'''
+    '''this function takes a model name, X and y and returns different prediction scores for the classification tree model for those inputs'''
 
     # split in train and test data
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25)
@@ -44,15 +44,15 @@ def classification_tree(model_name, X, y):
 #
 #
 #
-def classification_KNN(model_name, X, y):
+def classification_KNN(model_name, X, y, nnn):
 
-    '''write description'''
+    '''this function takes a model name, X and y and returns different prediction scores for the classification KNN model for those inputs'''
 
     # split in train and test data
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25)
 
     # pick and fit model  
-    model = KNeighborsClassifier(n_neighbors=75)
+    model = KNeighborsClassifier(n_neighbors=nnn)
     model.fit(X_train, y_train)
 
     predictions = model.predict(X_test)
@@ -74,7 +74,7 @@ def classification_KNN(model_name, X, y):
 #
 def classification_LogisticRegression(model_name, X, y):
 
-    '''write description'''
+    '''this function takes a model name, X and y and returns different prediction scores for the Logistic Regression model for those inputs'''
 
     # split in train and test data
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25)
@@ -102,7 +102,7 @@ def classification_LogisticRegression(model_name, X, y):
 #
 def encode_categoricals(X):
 
-    '''write description'''
+    '''this function takes an X variable and encodes all categoricals for X'''
 
     # split into numerical and categorical variables
     X_num = X.select_dtypes(include = np.number)
@@ -120,7 +120,7 @@ def encode_categoricals(X):
 #
 def standardizer(X):
 
-    '''write description'''
+    '''this function takes an X variable and standardizes with standardscaler'''
 
     # split into numerical and categorical variables
     X_num = X.select_dtypes(include = np.number)
@@ -147,7 +147,7 @@ def standardizer(X):
 #
 def min_max_imizer(X):
 
-    '''write description'''
+    '''this function takes an X variable and standardizes with min_max_scaler'''
 
     # split into numerical and categorical variables
     X_num = X.select_dtypes(include = np.number)
@@ -174,7 +174,7 @@ def min_max_imizer(X):
 #
 def normalizer(X):
 
-    '''write description'''
+    '''this function takes an X variable and standardizes with normalizer'''
 
     # split into numerical and categorical variables
     X_num = X.select_dtypes(include = np.number)

@@ -83,7 +83,7 @@ def get_data_from_timestamp(column, df):
 #
 def get_category_data(column, df):
 
-    '''this function takes a timestamp and creates 3 new columns for date,time,weekday out of it'''  
+    '''a column in a dataframe and extracts different information from a dictionary'''  
 
     slug = []
     parent_name = []

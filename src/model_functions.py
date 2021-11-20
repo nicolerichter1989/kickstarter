@@ -134,9 +134,9 @@ def standardizer(X):
     x_array = pd.DataFrame(x_standardized, columns = X_num.columns)
 
     # create new df from encoded cat_df and num_df (define X again)
-    Xresult = pd.concat([X_cat, x_array], axis = 1)
+    # Xresult = pd.concat([X_cat, x_array], axis = 1)
 
-    return Xresult
+    return x_array
 #
 #
 #
@@ -156,9 +156,9 @@ def min_max_imizer(X):
     x_array = pd.DataFrame(x_min_max, columns = X_num.columns)
 
     # create new df from encoded cat_df and num_df (define X again)
-    Xresult = pd.concat([X_cat, x_array], axis = 1)
+    # Xresult = pd.concat([X_cat, x_array], axis = 1)
 
-    return Xresult
+    return x_array
 #
 #
 #
@@ -178,9 +178,9 @@ def normalizer(X):
     x_array = pd.DataFrame(x_normalized, columns = X_num.columns)
 
     # create new df from encoded cat_df and num_df (define X again)
-    Xresult = pd.concat([X_cat, x_array], axis = 1)
+    # Xresult = pd.concat([X_cat, x_array], axis = 1)
 
-    return Xresult
+    return x_array
 #
 #
 #

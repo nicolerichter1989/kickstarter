@@ -27,9 +27,7 @@ def classification_tree(model_name, X, y):
     model = DecisionTreeClassifier()
     model.fit(X_train, y_train)
 
-    # calculate score and predictions
-    score = "{:.2%}".format(round(model.score(X_test, y_test),4))
-    predictions = predictions = model.predict(X_test)
+    predictions = model.predict(X_test)
 
     # create confusion_matrix
     confusion = metrics.confusion_matrix(y_test, predictions)
@@ -54,15 +52,13 @@ def classification_KNN(model_name, X, y):
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25)
 
     # pick and fit model  
-    model = KNeighborsRegressor(n_neighbors=4)
+    model = KNeighborsRegressor(n_neighbors=75)
     model.fit(X_train, y_train)
 
-    # calculate score and predictions
-    score = "{:.2%}".format(round(model.score(X_test, y_test),4))
-    predictions = predictions = model.predict(X_test)
+    predictions = model.predict(X_test)
 
     # create confusion_matrix
-    confusion = metrics.confusion_matrix(y_test, predictions)
+    confusion = confusion_matrix(y_test, predictions)
     true_positives = confusion[1,1]
     true_negatives = confusion[0,0]
     false_positives = confusion[0,1]
@@ -87,9 +83,7 @@ def classification_LogisticRegression(model_name, X, y):
     model = LogisticRegression(max_iter=1000)
     model.fit(X_train, y_train)
 
-    # calculate score and predictions
-    score = "{:.2%}".format(round(model.score(X_test, y_test),4))
-    predictions = predictions = model.predict(X_test)
+    predictions = model.predict(X_test)
 
     # create confusion_matrix
     confusion = metrics.confusion_matrix(y_test, predictions)

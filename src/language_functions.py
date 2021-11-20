@@ -11,6 +11,7 @@ from nltk.tokenize import sent_tokenize, word_tokenize
 from nltk.corpus import stopwords
 from rake_nltk import Rake
 from nltk.sentiment import SentimentIntensityAnalyzer
+from string import punctuation
 
 
 ## functions
@@ -234,7 +235,7 @@ def more_nltk(column, df):
             words.append(len(word_tokenize(str(i))))
             filtered_words.append(len([w for w in i if not w.lower() in stop_words]))
             sent.append(len(sent_tokenize(str(i))))
-            stopw.append((len(word_tokenize(str(i)))) - (len([w for w in i if w.lower() in stop_words])))
+            stopw.append(len([w for w in i if w in stop_words]))
 
     df[f'{column}' + '_words'] = words
     df[f'{column}' + '_filtered_words'] = filtered_words
@@ -245,25 +246,49 @@ def more_nltk(column, df):
 #
 #
 #
-def get_keywords(column, df):
+def get_keyword_base(column, df):
 
     '''this function returns the length of text for the input column'''
+    from string import punctuation
+    df[f'{column}'] = df[f'{column}'].apply(str)
+    stop_words = set(stopwords.words('english'))
+    punctuation = list(punctuation)
 
-    # uses english stopwords and all puctuation characters
-    r = Rake()
-
-    keywords = []
+    kw_base  = []
 
     for i in df[f'{column}']:
-        r.extract_keywords_from_text(i)
-        scores = r.get_word_degrees()
-        keywords.append(scores.keys())
+        lower_tokens = [x.lower() for x in word_tokenize(i)]
+        final_tokens = [t for t in lower_tokens if t not in stop_words and t not in punctuation]
+        kw_base.append(final_tokens)    
 
-    df[f'{column}' + '_kw'] = keywords
+    df[f'{column}' + '_kw_base'] = kw_base
 
     return df
 #
 #
 #
+def get_final_keywords(column, df):
 
+    '''this function returns the length of text for the input column'''
+    from string import punctuation
+    df[f'{column}'] = df[f'{column}'].apply(str)
+    stop_words = set(stopwords.words('english'))
+    punctuation = list(punctuation)
 
+    r = Rake()
+
+    keywords  = []
+
+    for i in df[f'{column}']:
+        lower_tokens = [x.lower() for x in word_tokenize(i)]
+        final_tokens = [t for t in lower_tokens if t not in stop_words and t not in punctuation]
+        r.extract_keywords_from_text(final_tokens)
+        scores = r.get_word_degrees()
+        keywords.append(scores.keys())
+
+    df[f'{column}' + '_kw_final'] = keywords
+
+    return df
+#
+#
+#

@@ -223,11 +223,18 @@ def more_nltk(column, df):
     stopw = []
 
     for i in df[f'{column}']:
-        words.append(len(word_tokenize(str(i))))
-        filtered_words.append(len([w for w in i if not w.lower() in stop_words]))
-        sent.append(len(sent_tokenize(str(i))))
 
-    stopw = (len(word_tokenize(str(i)))) - (len([w for w in i if not w.lower() in stop_words]))
+        if isinstance(i, float):
+            words.append('')
+            filtered_words.append('')
+            sent.append('')
+            stopw.append('')
+        
+        else:
+            words.append(len(word_tokenize(str(i))))
+            filtered_words.append(len([w for w in i if not w.lower() in stop_words]))
+            sent.append(len(sent_tokenize(str(i))))
+            stopw.append((len(word_tokenize(str(i)))) - (len([w for w in i if w.lower() in stop_words])))
 
     df[f'{column}' + '_words'] = words
     df[f'{column}' + '_filtered_words'] = filtered_words
@@ -258,3 +265,5 @@ def get_keywords(column, df):
 #
 #
 #
+
+

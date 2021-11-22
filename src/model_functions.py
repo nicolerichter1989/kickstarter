@@ -13,6 +13,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn import metrics
 from sklearn.metrics import confusion_matrix, mean_absolute_error, mean_squared_error, r2_score, accuracy_score
 from sklearn.preprocessing import StandardScaler, MinMaxScaler, Normalizer
+from scipy.stats.mstats import winsorize
 
 ## functions
 
@@ -196,6 +197,64 @@ def normalizer(X):
         X_out = Xresult
 
     return X_out
+#
+#
+#
+def fences(df, column):
+    
+    '''this function takes an X variable and standardizes with normalizer'''
+  
+    q1 = df[column].quantile(0.25)
+    q3 = df[column].quantile(0.75)
+    iqr = q3-q1
+    
+    outer_fence = 3*iqr
+    outer_fence_le = q1-outer_fence
+    outer_fence_ue = q3+outer_fence
+    
+    return outer_fence_le, outer_fence_ue
+#
+#
+#
+def closest_fence(df, position):
+   
+    '''this function takes an X variable and standardizes with normalizer'''
+
+    quantiles = [0.900,0.925,0.950,0.975,0.990,0.999]
+    distance = []
+
+    for i in df:
+
+        a = abs((df[i].quantile(0.900)) - (fences(df, i)[position]))
+        b = abs((df[i].quantile(0.925)) - (fences(df, i)[position]))
+        c = abs((df[i].quantile(0.950)) - (fences(df, i)[position]))
+        d = abs((df[i].quantile(0.975)) - (fences(df, i)[position]))
+        e = abs((df[i].quantile(0.990)) - (fences(df, i)[position]))
+        f = abs((df[i].quantile(0.999)) - (fences(df, i)[position]))
+        distance.append([a,b,c,d,e,f])
+
+    new_quantile = []
+
+    for i in distance:
+        index = i.index(min(i))
+        new_quantile.append(quantiles[index])
+    
+    return new_quantile
+#
+#
+#
+def wins(column, df, target):
+  
+    '''this function takes an X variable and standardizes with normalizer'''
+
+    wins = []
+
+    for iteration in enumerate(df):
+        right_limit = ("{:.2}".format(round((1-(target[iteration])),3)))
+
+    df[f'{column}' + '_wins'] = winsorize((df[f'{column}']), limits=(0, right_limit))
+
+    return df
 #
 #
 #

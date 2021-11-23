@@ -16,17 +16,6 @@ from string import punctuation
 
 ## functions
 
-def all_text_and_language_functions(column, df):
-
-    '''this function returns all transformations (language, polarity, subjecticity, text length, keywords) to the input column''' 
-
-    language_features(column, df)
-
-    language_length(column, df)
-
-    language_keywords(column, df)
-
-    return df
 #
 #
 #
@@ -44,47 +33,6 @@ def add_language_column(column, df):
             language.append(a[0])
 
     df[f'{column}' + '_language'] = language
-
-    return df
-#
-#
-#
-def language_features(column, df):
-
-    '''this function returns language features polarity and subjectiviy for the input column''' 
-
-    polarity = []
-    subjectivity = []
-
-    for i in df[f'{column}']:
-        if isinstance(i, float):
-            polarity.append(0)
-            subjectivity.append(0)
-        else:
-            a = TextBlob(i)
-            polarity.append(round(a.polarity,2))
-            subjectivity.append(round(a.subjectivity,2))
-
-    df[f'{column}' + '_pol'] = polarity
-    df[f'{column}' + '_sub']  = subjectivity
-
-    return df
-#
-#
-#
-def language_length(column, df):
-
-    '''this function returns the length of text for the input column'''
-
-    length = []
-
-    for i in df[f'{column}']:
-        if isinstance(i, float):
-            length.append(0)
-        else:    
-            length.append(len(i))
-    
-    df[f'{column}' + '_len'] = length
 
     return df
 #
@@ -111,7 +59,7 @@ def language_translation_english(column, df):
 #
 def language_keywords(column, df):
 
-    '''this function returns the length of text for the input column'''
+    '''this function returns keywords for the input column'''
 
     r = Rake()
 
@@ -132,7 +80,7 @@ def language_keywords(column, df):
 #
 def translation(column, df):
 
-    '''this function returns the length of text for the input column'''
+    '''this function returns the translation to english of text for the input column'''
 
     trans = []
 
@@ -154,7 +102,7 @@ def translation(column, df):
 #
 def nltk_sentiment(column, df):
 
-    '''this function returns the length of text for the input column'''
+    '''this function returns different nltk sentiments for the input column'''
     
     sia = SentimentIntensityAnalyzer()
 
@@ -191,7 +139,7 @@ def nltk_sentiment(column, df):
 #
 def group_columns(column, df, threshold):
 
-    '''this function returns the length of text for the input column'''
+    '''this function groups the input column based on the threshold input'''
     
     a = df[f'{column}'].value_counts()
     dd = defaultdict(list)
@@ -214,7 +162,7 @@ def group_columns(column, df, threshold):
 #
 def more_nltk(column, df):
 
-    '''this function returns the length of text for the input column'''
+    '''this function returns different nltk extracts from the input column'''
 
     stop_words = set(stopwords.words('english'))
 
@@ -248,7 +196,7 @@ def more_nltk(column, df):
 #
 def get_keyword_base(column, df):
 
-    '''this function returns the length of text for the input column'''
+    '''this function returns the kw base'''
     from string import punctuation
     df[f'{column}'] = df[f'{column}'].apply(str)
     stop_words = set(stopwords.words('english'))
@@ -269,7 +217,7 @@ def get_keyword_base(column, df):
 #
 def get_final_keywords(column, df):
 
-    '''this function returns the length of text for the input column'''
+    '''this function returns the keywords'''
     from string import punctuation
     df[f'{column}'] = df[f'{column}'].apply(str)
     stop_words = set(stopwords.words('english'))

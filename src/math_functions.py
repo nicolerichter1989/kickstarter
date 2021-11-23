@@ -49,7 +49,7 @@ def drop_and_compare_duplicate_id(df):
     duplicate_project_id_before = df.duplicated(subset='id', keep='first').sum()
     before_dropping_duplicates = df.shape
 
-    df = (df.sort_values(by=['id', 'state_changed_at'], ascending=True).drop_duplicates(subset='id', keep= 'first').reset_index(drop=True))
+    df = (df.sort_values(by=['blurb', 'backers_count'], ascending=False).drop_duplicates(subset='blurb', keep= 'first').reset_index(drop=True))
 
     duplicate_project_id_after = df.duplicated(subset='id', keep='first').sum()
     after_dropping_duplicates = df.shape

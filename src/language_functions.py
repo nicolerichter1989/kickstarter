@@ -180,10 +180,17 @@ def more_nltk(column, df):
             stopw.append('')
         
         else:
-            words.append(len(word_tokenize(str(i))))
-            filtered_words.append(len([w for w in i if not w.lower() in stop_words]))
-            sent.append(len(sent_tokenize(str(i))))
-            stopw.append(len([w for w in i if w in stop_words]))
+            w = word_tokenize(str(i))
+            words.append(len(w))
+
+            fw = ([w for w in i if not w.lower() in stop_words])
+            filtered_words.append(len(fw))
+
+            s = sent_tokenize(str(i))
+            sent.append(len(s))
+
+            sw = ([w for w in i if w in stop_words])
+            stopw.append(len(sw))
 
     df[f'{column}' + '_words'] = words
     df[f'{column}' + '_filtered_words'] = filtered_words
@@ -218,6 +225,7 @@ def get_keyword_base(column, df):
 def get_final_keywords(column, df):
 
     '''this function returns the keywords'''
+
     from string import punctuation
     df[f'{column}'] = df[f'{column}'].apply(str)
     stop_words = set(stopwords.words('english'))
@@ -237,6 +245,16 @@ def get_final_keywords(column, df):
     df[f'{column}' + '_kw_final'] = keywords
 
     return df
+#
+#
+#
+def ratio(column1, column2, df):
+
+    '''this function returns the keywords'''
+
+    df['new'] = (df[f'{column1}'] / df[f'{column2}'])
+
+    return df['new']
 #
 #
 #

@@ -167,35 +167,24 @@ def more_nltk(column, df):
     stop_words = set(stopwords.words('english'))
 
     words = []
-    filtered_words = []
     sent = []
-    stopw = []
 
     for i in df[f'{column}']:
 
         if isinstance(i, float):
             words.append('')
-            filtered_words.append('')
             sent.append('')
-            stopw.append('')
         
         else:
             w = word_tokenize(str(i))
             words.append(len(w))
 
-            fw = ([w for w in i if not w.lower() in stop_words])
-            filtered_words.append(len(fw))
-
             s = sent_tokenize(str(i))
             sent.append(len(s))
 
-            sw = ([w for w in i if w in stop_words])
-            stopw.append(len(sw))
 
     df[f'{column}' + '_words'] = words
-    df[f'{column}' + '_filtered_words'] = filtered_words
     df[f'{column}' + '_sent'] = sent
-    df[f'{column}' + '_stopw'] = stopw
 
     return df
 #
@@ -214,7 +203,8 @@ def get_keyword_base(column, df):
     for i in df[f'{column}']:
         lower_tokens = [x.lower() for x in word_tokenize(i)]
         final_tokens = [t for t in lower_tokens if t not in stop_words and t not in punctuation]
-        kw_base.append(final_tokens)    
+        final_string = ' '.join(str(item) for item in final_tokens)
+        kw_base.append(final_string)    
 
     df[f'{column}' + '_kw_base'] = kw_base
 

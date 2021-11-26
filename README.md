@@ -32,21 +32,20 @@ Here are the columns that were used for the final model:
 | launched_at_weekday | weekday the project was launched |
 | deadline_weekday | weekday the project was finished |
 | project_duration | duration of project |
-| blurb_language_new | language of description grouped |
-| country_new | language of description grouped |
-| description_words | language of description grouped |
-| description_sent | language of description grouped |
-| descr_stopw | language of description grouped |
-| description_filtered_words | language of description grouped |
-| desc_filt_ratio | language of description grouped |
-| desc_sw_ratio | language of description grouped |
-| desc_wps_ratio | language of description grouped |
-| description_neg | language of description grouped |
-| description_neu | language of description grouped |
-| description_pos | language of description grouped |
-| description_compound | language of description grouped |
+| blurb_language_new | description language grouped |
+| country_new | countries grouped |
+| description_words | count of words |
+| description_sent | count of sentences |
+| descr_stopw | count of stopwords |
+| description_filtered_words | count of filtered words |
+| desc_filt_ratio | ratio of filtered words per description words |
+| desc_sw_ratio | ratio of stopwords per description words |
+| desc_wps_ratio | ratio or words per sentence |
+| description_neg | sentiment analysis from nltk library - negative words |
+| description_neu | sentiment analysis from nltk library - neutreal words |
+| description_pos | sentiment analysis from nltk library - positive words |
+| description_compound | sentiment analysis from nltk library - compound of words |
 | columns xxx to xxx | encoding of 1.000 most common words in successful projects |
-
 
 ### Learnings
 

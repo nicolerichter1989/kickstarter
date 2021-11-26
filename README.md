@@ -19,7 +19,7 @@ The data has been downloaded from https://webrobots.io/kickstarter-datasets/
 ### Shape of the Data
 
 Before cleaning the dataframe consisted of 543.589 rows and 39 columns. 
-After cleaning the dataframe used for EDA and model consisted of 186.303 rows and 122 columns.
+After cleaning the dataframe used for EDA and model consisted of 186.303 rows and 1.012 columns.
 
 Here are the columns that were used for the final model:
 

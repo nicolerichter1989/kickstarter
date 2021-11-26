@@ -8,15 +8,13 @@ Every project creator sets their project's funding goal and deadline. If people 
 
 ## Objective
 
-The goal  is to be able to predict whether or not a project will receive it's goal funds.
+The objective is to predict if a project will receive it's goal funds.
 
 ## Data
 
-describe data etc.
-
 ### Data Source
 
-The data has been extracted via apify downloads from kickstarter.
+The data has been downloaded from https://webrobots.io/kickstarter-datasets/
 
 ### Shape of the Data
 
@@ -35,11 +33,22 @@ Here are the columns that were used for the final model:
 | deadline_weekday | weekday the project was finished |
 | project_duration | duration of project |
 | blurb_language_new | language of description grouped |
-| xxx | xxx |
+| country_new | language of description grouped |
+| description_words | language of description grouped |
+| description_sent | language of description grouped |
+| descr_stopw | language of description grouped |
+| description_filtered_words | language of description grouped |
+| desc_filt_ratio | language of description grouped |
+| desc_sw_ratio | language of description grouped |
+| desc_wps_ratio | language of description grouped |
+| description_neg | language of description grouped |
+| description_neu | language of description grouped |
+| description_pos | language of description grouped |
+| description_compound | language of description grouped |
 | columns xxx to xxx | encoding of 1.000 most common words in successful projects |
 
 
-### Notes from Tableau EDA
+### Learnings
 
 - project duration ranges from x to y
 - project duration is shorter for successful projects (among all categories, countries)

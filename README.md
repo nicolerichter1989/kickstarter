@@ -21,7 +21,7 @@ The data has been extracted via apify downloads from kickstarter.
 ### Shape of the Data
 
 Before cleaning the dataframe consisted of 543.589 rows and 39 columns. 
-After cleaning the dataframe used for EDA and model consisted of 176.721 rows and 22 columns.
+After cleaning the dataframe used for EDA and model consisted of 186.303 rows and 122 columns.
 
 Here are the columns that were used for the final model:
 
@@ -59,9 +59,6 @@ Here are the columns that were used for the final model:
 - generally most successful projects are launched on tuesdays
 - 
 
-
-
-
 ## Python Libraries
 - [pandas](https://pandas.pydata.org/)
 - [numpy](https://numpy.org/)
@@ -70,9 +67,7 @@ Here are the columns that were used for the final model:
 - [statsmodels](https://www.statsmodels.org/stable/index.html)
 - [scipy](https://www.scipy.org/)
 - [sklearn](https://scikit-learn.org/stable/)
-
-### Libraries use for NLP
+- [imblearn](https://imbalanced-learn.org/stable/)
 - [textblob](https://textblob.readthedocs.io/en/dev/)
-- [yake](https://pypi.org/project/yake/)
 - [langid](https://pypi.org/project/langid/1.1.2dev/)
-- [rake-nltk](https://pypi.org/project/rake-nltk/)
+- [nltk](https://www.nltk.org/)

@@ -23,32 +23,20 @@ The data has been extracted via apify downloads from kickstarter.
 Before cleaning the dataframe consisted of 543.589 rows and 39 columns. 
 After cleaning the dataframe used for EDA and model consisted of 176.721 rows and 22 columns.
 
-Here is and overview of the columns used for EDA and model:
+Here are the columns that were used for the final model:
 
 | Column name | Description |
 | ----------- | ----------- |
-| backers_count | count of people backing the project |
-| converted_pledged_amount | short description of the project |
-| country_displayable_name | amount of money pledged |
-| goal | country full name |
-| state | categoryId |
-| category_name | categoryId |
-| category_analytics_name | name of category |
-| category_slug | name of subcategory |
-| category_parent_name | amount of money pledged |
-| created_at_date | country |
-| created_at_time | country full name |
-| created_at_weekday | timestamp of when the project was created |
-| launched_at_date | formatted created |
-| launched_at_time | e |
-| launched_at_weekday | e |
-| deadline_date | e |
-| deadline_time | e |
-| deadline_weekday | e |
-| project_duration | e |
-| funded_rate | e |
-| blurb_language | e |
-| description | goal amount |
+| goal | amount to be fully funded |
+| state | successful (1) or failed (0) project |
+| category_slug | name of category and subcategory concatenated |
+| category_parent_name | name of category |
+| launched_at_weekday | weekday the project was launched |
+| deadline_weekday | weekday the project was finished |
+| project_duration | duration of project |
+| blurb_language_new | language of description grouped |
+| xxx | xxx |
+| columns xxx to xxx | encoding of 1.000 most common words in successful projects |
 
 
 ### Notes from Tableau EDA
